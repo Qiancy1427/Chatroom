@@ -6,10 +6,9 @@
 using namespace std;
 extern const char *serid;
 extern SOCKET sclient;
-extern string userid,history[10005];
+extern string userid,readdata,history[10005];
 extern bool flg;
 extern int sum;
-string read();
 bool cnt(){
     if(sclient==INVALID_SOCKET) return false;
     sockaddr_in seraddr;
@@ -24,9 +23,12 @@ bool cnt(){
 }
 void *msend(void *id){
     flg=true;
-    string data=userid+';'+read();
+    readdata+=getchar();
+    if(readdata[readdata.size()-1]!='\n'){
+        pthread_exit(NULL);
+    }
     const char *senddata;
-    senddata=data.c_str();
+    senddata=readdata.c_str();
     int x=send(sclient,senddata,strlen(senddata),0);
     cout<<x;    //for test
     flg=false;
