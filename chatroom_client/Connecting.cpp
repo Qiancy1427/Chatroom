@@ -7,7 +7,6 @@ using namespace std;
 extern const char *serid;
 extern SOCKET sclient;
 extern string userid,readdata,history[10005];
-extern bool flg;
 extern int sum;
 bool cnt(){
     if(sclient==INVALID_SOCKET) return false;
@@ -22,7 +21,6 @@ bool cnt(){
     return true;
 }
 void *msend(void *id){
-    flg=true;
     readdata+=getchar();
     if(readdata[readdata.size()-1]!='\n'){
         pthread_exit(NULL);
@@ -31,7 +29,6 @@ void *msend(void *id){
     senddata=readdata.c_str();
     int x=send(sclient,senddata,strlen(senddata),0);
     cout<<x;    //for test
-    flg=false;
     pthread_exit(NULL);
 }
 void *mrec(void *id){
