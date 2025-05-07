@@ -1,3 +1,0 @@
-C:/Users/qianchengyi/CLionProjects/Chatroom/chatroom_client/cmake-build-debug/CMakeFiles/chatroom_client.dir
-C:/Users/qianchengyi/CLionProjects/Chatroom/chatroom_client/cmake-build-debug/CMakeFiles/edit_cache.dir
-C:/Users/qianchengyi/CLionProjects/Chatroom/chatroom_client/cmake-build-debug/CMakeFiles/rebuild_cache.dir

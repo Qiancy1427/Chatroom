@@ -8,6 +8,7 @@ extern const char *serid;
 extern SOCKET sclient;
 extern string userid,readdata,history[10005];
 extern int sum;
+extern void rerend();
 bool cnt(){
     if(sclient==INVALID_SOCKET) return false;
     sockaddr_in seraddr;
@@ -21,23 +22,29 @@ bool cnt(){
     return true;
 }
 void *msend(void *id){
-    readdata+=getchar();
-    if(readdata[readdata.size()-1]!='\n'){
-        pthread_exit(NULL);
+    while(true){
+        readdata+=getchar();
+        if(readdata[readdata.size()-1]!='\n'){
+            pthread_exit(NULL);
+        }
+        const char *senddata;
+        senddata=readdata.c_str();
+        readdata.clear();
+        int x=send(sclient,senddata,strlen(senddata),0);
+        cout<<x;    //for test
     }
-    const char *senddata;
-    senddata=readdata.c_str();
-    int x=send(sclient,senddata,strlen(senddata),0);
-    cout<<x;    //for test
     pthread_exit(NULL);
 }
 void *mrec(void *id){
-    char recdata[255];
-    int ret=recv(sclient,recdata,255,0);
-    if(ret>0){
-        recdata[ret]=0x00;
+    while(true){
+        char recdata[255];
+        int ret=recv(sclient,recdata,255,0);
+        if(ret>0){
+            recdata[ret]=0x00;
+        }
+        string ss(recdata);
+        history[++sum]=ss;
+        rerend();
     }
-    string ss(recdata);
-    history[++sum]=ss;
     pthread_exit(NULL);
 }

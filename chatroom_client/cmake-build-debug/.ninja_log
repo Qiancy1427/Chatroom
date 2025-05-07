@@ -1,9 +1,0 @@
-# ninja log v5
-250	5530	7521796604696801	CMakeFiles/chatroom_client.dir/Read_Write.cpp.obj	1e2e8683be59e578
-1	8334	7521796632548998	CMakeFiles/chatroom_client.dir/Connecting.cpp.obj	5360245a9cb1570e
-119	8493	7521796634340350	CMakeFiles/chatroom_client.dir/main.cpp.obj	44f1cb38e7c1b901
-8494	9457	7521796643960288	chatroom_client.exe	3b01904661a88552
-1	5212	7553633377390446	CMakeFiles/chatroom_client.dir/main.cpp.obj	44f1cb38e7c1b901
-195	5215	7553633377411168	CMakeFiles/chatroom_client.dir/Connecting.cpp.obj	5360245a9cb1570e
-4	2789	7553637266669183	CMakeFiles/chatroom_client.dir/Connecting.cpp.obj	5360245a9cb1570e
-2791	3172	7553637270482645	chatroom_client.exe	efd64ff883ed61ff
