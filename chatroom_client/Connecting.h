@@ -4,11 +4,10 @@
 #include<bits/stdc++.h>
 #include<winsock2.h>
 using namespace std;
-extern const char *serid;
-extern SOCKET sclient;
-extern string userid,readdata,history[10005];
-extern int sum;
-extern void rerend();
+const char *serid="110.242.68.3";
+SOCKET sclient;
+string userid, history[10005], readdata;
+int sum;
 bool cnt(){
     if(sclient==INVALID_SOCKET) return false;
     sockaddr_in seraddr;
@@ -44,7 +43,7 @@ void *mrec(void *id){
         }
         string ss(recdata);
         history[++sum]=ss;
-        rerend();
+        //rendmes(++sum);
     }
     pthread_exit(NULL);
 }
