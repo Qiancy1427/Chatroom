@@ -4,15 +4,15 @@
 #include <bits/stdc++.h>
 #include <graphics.h>
 using namespace std;
+char history[500][1000];
 void initializerend(){
     initgraph(960, 540);
     setbkcolor(EGERGB(0x0, 0x0, 0x0));
     setcolor(EGERGB(0xff, 0xff, 0xff));
     line(0, 450, 960, 450);
     setfont(15, 0, "Consolas");
-    setfillcolor(EGERGB(0xff, 0x0, 0x0));
+    setfillcolor(EGERGB(0x0, 0x0, 0x0));
     getch();
-    bar(0, 0, 960, 450);
     return;
 }
 char readkey(){
@@ -24,15 +24,15 @@ char readkey(){
     }
     return char(k[1].key);
 }
-void rendhistory(char *ch[], int num){
-    if(num < 56){
-        outtextxy(0, num*8, ch[num]);
+void rendhistory(int num){
+    if(num < 30){
+        outtextxy(0, num*15, history[num]);
     }
     else{
         bar(0, 0, 960, 450);
+        for(int i = 0; i < 30; i++){
+            outtextxy(0, i * 15, history[num-29+i]);
+        }
     }
     return;
-}
-void rendmes(string s){
-
 }

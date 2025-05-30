@@ -3,6 +3,7 @@
 //
 #include<bits/stdc++.h>
 #include<winsock2.h>
+#include<winsock.h>
 using namespace std;
 const char *serid="110.242.68.3";
 SOCKET sclient;
