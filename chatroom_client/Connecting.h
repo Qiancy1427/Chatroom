@@ -6,8 +6,7 @@
 using namespace std;
 const char *serid="110.242.68.3";
 SOCKET sclient;
-string userid, history[10005], readdata;
-int sum;
+string userid, password;
 bool cnt(){
     if(sclient==INVALID_SOCKET) return false;
     sockaddr_in seraddr;
@@ -20,30 +19,12 @@ bool cnt(){
     }
     return true;
 }
-void *msend(void *id){
-    while(true){
-        readdata+=getchar();
-        if(readdata[readdata.size()-1]!='\n'){
-            pthread_exit(NULL);
-        }
-        const char *senddata;
-        senddata=readdata.c_str();
-        readdata.clear();
-        int x=send(sclient,senddata,strlen(senddata),0);
-        cout<<x;    //for test
-    }
-    pthread_exit(NULL);
+void msend(char *senddata){
+    int x=send(sclient,senddata,strlen(senddata),0);
+    cout<<x;    //for test
+    return;
 }
-void *mrec(void *id){
-    while(true){
-        char recdata[255];
-        int ret=recv(sclient,recdata,255,0);
-        if(ret>0){
-            recdata[ret]=0x00;
-        }
-        string ss(recdata);
-        history[++sum]=ss;
-        //rendmes(++sum);
-    }
-    pthread_exit(NULL);
+void mrec(char *recdata){
+    int ret=recv(sclient,recdata,255,0);
+    return;
 }
