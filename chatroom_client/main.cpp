@@ -16,7 +16,7 @@ void *thread1(void *id){
 }
 void *thread2(void *id){
     while(true){
-        mrec(history[sum_mes]);
+        //mrec(history[sum_mes]);
         //rendhistory(history);
     }
 }
@@ -25,15 +25,21 @@ int main() {
     WSADATA wd;
     if(WSAStartup(socketVersion,&wd)!=0)    return 0;
     initializerend();
+
+    wstring test = paste();
+    for(int i = 0; i < test.size(); i++){
+        history[0][i] = test[i];
+    }
+    rendhistory(0);
     getch();
 
-    for(int i = 0; i < 100; i++){
+    /*for(int i = 0; i < 100; i++){
         for(int j = 0; j < 1000; j++){
             history[i][j] = readkey();
             if(history[i][j] == 13)   break;
         }
         rendhistory(i);
-    }
+    }*/
 
     /*sclient=socket(AF_INET,SOCK_STREAM,IPPROTO_TCP);
     bool iscnt=cnt();
