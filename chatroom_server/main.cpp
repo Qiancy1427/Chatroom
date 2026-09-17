@@ -30,7 +30,7 @@ void *mbroadcast(){
 //        if(cinfo.empty())   continue;
         for(int i = 0; i < 20; i++){
             if(sinfo[i].fd == -1)   continue;
-            int tmp = send(sinfo[i].fd, cinfo, sizeof(cinfo), 0);
+            int tmp = send(sinfo[i].fd, cinfo, 255, 0);
             cout << tmp << " " << cinfo << "\n";
             if(tmp < 0) cout << "send err\n";
         }

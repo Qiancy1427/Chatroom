@@ -17,9 +17,9 @@ void *th_1(){
     }
 }
 void *th_2(){
-    for(int i = 1; i <= 5; i++ ){
+    while(true){
         mrec();
-        cout << history[sum_mes] << " main\n";
+        //cout << history[sum_mes] << " main\n";
         //rendhistory(history);
     }
 }
