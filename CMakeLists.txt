@@ -13,5 +13,5 @@ target_link_libraries(${PROJECT_NAME} PRIVATE ws2_32 -pthread graphics gdi32 gdi
 project(chatroom_server)
 set(CMAKE_CXX_STANDARD 17)
 link_directories(lib)
-add_executable(chatroom_server chatroom_server/main.cpp)
+add_executable(chatroom_server chatroom_server/main.cpp chatroom_server/Connecting.h chatroom_server/Connecting.h)
 target_link_libraries(${PROJECT_NAME} PRIVATE ws2_32.dll -pthread)

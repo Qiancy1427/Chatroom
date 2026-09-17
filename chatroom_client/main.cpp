@@ -1,22 +1,25 @@
-#include <pthread.h>
+//Client
+#include <thread>
 #include "Render.h"
 #include "Connecting.h"
 using namespace std;
-int sum_mes, indexes[15];
-pthread_t threads[15];
-void *thread1(void *id){
+int indexes[15];
+thread th[15];
+void *th_1(){
     while(true){
         char senddata[1000];
-        for(int i = 0; i<1000; i++){
-            senddata[i] = readkey();
-            if(senddata[i] == 13)   break;
-        }
+        cin.getline(senddata, sizeof(senddata));
+//        for(int i = 0; i<1000; i++){
+//            senddata[i] = readkey();
+//            if(senddata[i] == 13)   break;
+//        }
         msend(senddata);
     }
 }
-void *thread2(void *id){
-    while(true){
-        //mrec(history[sum_mes]);
+void *th_2(){
+    for(int i = 1; i <= 5; i++ ){
+        mrec();
+        cout << history[sum_mes] << " main\n";
         //rendhistory(history);
     }
 }
@@ -24,14 +27,12 @@ int main() {
     WORD socketVersion=MAKEWORD(2,2);
     WSADATA wd;
     if(WSAStartup(socketVersion,&wd)!=0)    return 0;
-    initializerend();
+    //initializerend();
 
-    wstring test = paste();
-    for(int i = 0; i < test.size(); i++){
-        history[0][i] = test[i];
-    }
-    rendhistory(0);
-    getch();
+    //wstring test = paste();
+//    for(int i = 0; i < test.size(); i++){
+//        history[0][i] = test[i];
+//    }
 
     /*for(int i = 0; i < 100; i++){
         for(int j = 0; j < 1000; j++){
@@ -41,28 +42,21 @@ int main() {
         rendhistory(i);
     }*/
 
-    /*sclient=socket(AF_INET,SOCK_STREAM,IPPROTO_TCP);
+    sclient=socket(AF_INET,SOCK_STREAM,IPPROTO_TCP);
+    if(sclient == -1){
+        cout<<"SOCKET Failed"<<"\n";
+        return -1;
+    }
     bool iscnt=cnt();
     if(!iscnt){
-        cout<<"Connection Failed"<<"\n";
-        system("pause");
+        cout<<"Connection Failed\n";
+        return -1;
     }
-    else    cout<<"Connection Succeeded"<<"\n"; //for test
-    system("pause");    //for test
-    int rc=pthread_create(&threads[1],NULL,msend,&(indexes[1]));
-    if(rc!=0){
-        cout<<"failed to send \n";
-        exit(-1);
-    }
-    rc=pthread_create(&threads[2],NULL,mrec,(void *)&(indexes[2]));
-    if(rc!=0){
-        cout<<"falied to recieve \n";
-        exit(-1);
-    }
-    for(int i=1;i<=sum;i++){
-        cout<<history[i]<<"\n";
-    }
-    cout<<readdata;*/
+    else    cout<<"Connection Succeeded\n"; //for test
+    th[0] = thread(th_1);
+    th[1] = thread(th_2);
+    th[0].detach();
+    th[1].join();
 
     WSACleanup();
     return 0;

@@ -4,7 +4,7 @@
 #include <bits/stdc++.h>
 #include <graphics.h>
 using namespace std;
-wchar_t history[500][1000];
+char history[500][1000];
 void initializerend(){
     initgraph(960, 540);
     setbkcolor(EGERGB(0x0, 0x0, 0x0));
