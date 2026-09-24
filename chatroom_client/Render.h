@@ -3,8 +3,11 @@
 //
 #include <bits/stdc++.h>
 #include <graphics.h>
+#include <conio.h>
 using namespace std;
-char history[500][1000];
+char history[500][1000], msg[255];
+int msglength;
+extern int useridlen;
 void initializerend(){
     initgraph(960, 540);
     setbkcolor(EGERGB(0x0, 0x0, 0x0));
@@ -12,19 +15,29 @@ void initializerend(){
     line(0, 450, 960, 450);
     setfont(15, 0, "Consolas");
     setfillcolor(EGERGB(0x0, 0x0, 0x0));
-    //getch();
-    return;
+    return ;
 }
-wchar_t readkey(){
-    key_msg k[3];
-    for(int i=0; i<3; i++){
-        k[i]=getkey();
-        //cout<<k[i].key<<"\n";
-        cout<<k[i].key<<"\n";
-        if(k[i].key == 16 || k[i].key == 17 || k[i].key == 20)  i--;
+
+int readkb(){
+    char ch = 0;
+    while(true){
+        ch = getch();
+        if(ch == 13) break;
+        if(ch == 27)    return -1;
+        if(ch == 8){
+            bar(50 + 8 * msglength, 480, 58 + 8 * msglength, 495);
+            msg[msglength--] = 0;
+            continue;
+        }
+        if(ch < 32 || ch > 127) continue;
+        if(msglength >= 255)    break;
+        msg[msglength++] = ch;
+        outtextxy(50 + 8 * msglength - useridlen, 480, ch);
     }
-    return wchar_t (k[1].key);
+    bar(0, 451, 960, 540);
+    return msglength;
 }
+
 void rendhistory(int num){
     if(num < 30){
         outtextxy(0, num*15, history[num]);

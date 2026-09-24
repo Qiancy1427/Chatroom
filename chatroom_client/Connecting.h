@@ -9,10 +9,11 @@
 #include<winsock2.h>
 #include<winsock.h>
 using namespace std;
-const char *serid="10.34.216.125";
+const char *serid="10.34.53.112";
 int sum_mes;
 SOCKET sclient;
-string userid, password;
+int useridlen;
+char userid[15];
 bool cnt(){
     if(sclient==INVALID_SOCKET) return false;
     sockaddr_in seraddr;
@@ -27,7 +28,7 @@ bool cnt(){
 }
 void msend(char *senddata){
     int x=send(sclient,senddata,strlen(senddata),0);
-    cout << x << "\n";    //for test
+    cout << x << "\n";
 }
 void mrec(){
     char recdata[1000];

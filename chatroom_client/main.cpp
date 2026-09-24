@@ -7,40 +7,32 @@ int indexes[15];
 thread th[15];
 void *th_1(){
     while(true){
-        char senddata[1000];
-        cin.getline(senddata, sizeof(senddata));
-//        for(int i = 0; i<1000; i++){
-//            senddata[i] = readkey();
-//            if(senddata[i] == 13)   break;
-//        }
-        msend(senddata);
+        for(int i = 0; i < useridlen; i++)  msg[i] = userid[i];
+        msglength = useridlen;
+        msg[msglength++] = ':';
+        int isread = readkb();
+        if(isread == -1)    break;
+        msend(msg);
+        memset(msg, 0, sizeof(msg));
+//        msglength = 0;
     }
 }
 void *th_2(){
     while(true){
         mrec();
-        //cout << history[sum_mes] << " main\n";
-        //rendhistory(history);
+        rendhistory(sum_mes);
     }
 }
 int main() {
     WORD socketVersion=MAKEWORD(2,2);
     WSADATA wd;
     if(WSAStartup(socketVersion,&wd)!=0)    return 0;
-    //initializerend();
+    initializerend();
 
-    //wstring test = paste();
-//    for(int i = 0; i < test.size(); i++){
-//        history[0][i] = test[i];
-//    }
-
-    /*for(int i = 0; i < 100; i++){
-        for(int j = 0; j < 1000; j++){
-            history[i][j] = readkey();
-            if(history[i][j] == 13)   break;
-        }
-        rendhistory(i);
-    }*/
+    outtextxy(40, 465, "USERID:");
+    useridlen = readkb();
+    for(int i = 0; i < useridlen; i++)  userid[i] = msg[i];
+    memset(msg, 0, sizeof(msg));
 
     sclient=socket(AF_INET,SOCK_STREAM,IPPROTO_TCP);
     if(sclient == -1){
@@ -55,8 +47,8 @@ int main() {
     else    cout<<"Connection Succeeded\n"; //for test
     th[0] = thread(th_1);
     th[1] = thread(th_2);
-    th[0].detach();
-    th[1].join();
+    th[1].detach();
+    th[0].join();
 
     WSACleanup();
     return 0;
