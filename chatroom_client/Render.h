@@ -1,6 +1,9 @@
 //
 // Created by qianchengyi on 2025/5/8.
 //
+#ifndef CHATROOM_CLIENT_RENDER
+#define CHATROOM_CLIENT_RENDER
+
 #include <bits/stdc++.h>
 #include <graphics.h>
 #include <conio.h>
@@ -24,15 +27,15 @@ int readkb(){
         ch = getch();
         if(ch == 13) break;
         if(ch == 27)    return -1;
-        if(ch == 8){
-            bar(50 + 8 * msglength, 480, 58 + 8 * msglength, 495);
+        if(ch == 8 && msglength > useridlen + 1){
+            bar(50 + 8 * msglength, 480, 58 + 8 * (msglength - useridlen - 1), 495);
             msg[msglength--] = 0;
             continue;
         }
         if(ch < 32 || ch > 127) continue;
         if(msglength >= 255)    break;
         msg[msglength++] = ch;
-        outtextxy(50 + 8 * msglength - useridlen, 480, ch);
+        outtextxy(50 + 8 * (msglength - useridlen), 480, ch);
     }
     bar(0, 451, 960, 540);
     return msglength;
@@ -68,3 +71,5 @@ wstring paste(){
     }
     return cbstring;
 }
+
+#endif

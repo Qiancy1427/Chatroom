@@ -12,9 +12,12 @@ void *th_1(){
         msg[msglength++] = ':';
         int isread = readkb();
         if(isread == -1)    break;
+        if(isread == useridlen + 1){
+            memset(msg, 0, sizeof(msg));
+            continue;
+        }
         msend(msg);
         memset(msg, 0, sizeof(msg));
-//        msglength = 0;
     }
 }
 void *th_2(){
